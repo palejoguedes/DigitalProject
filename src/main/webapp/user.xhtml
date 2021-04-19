@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	
+	<ui:composition template="/_template.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<p:card class="card-form">
+					<p:messages><p:autoUpdate/></p:messages>
+					<f:facet name="title">New User</f:facet>
+					<div class="p-field p-grid">
+						<label for="name" class="p-col-fixed" style="width: 100px">Name</label>
+						<div class="p-col">
+							<p:inputText id="name" 
+								value="#{userBean.user.nome}"
+								required="true" 
+								requiredMessage="Name is required"> 
+								<f:ajax event="blur" render="messages"/>	
+							</p:inputText>
+						</div>
+					</div>
+					<div class="p-field p-grid">
+						<label for="dataNasc" class="p-col-fixed" style="width: 100px">Born Date</label>
+						<div class="p-col">
+							<p:inputText 
+								id="dataNasc" 
+								value="#{userBean.user.dateNasc}"
+								required="true"
+								requiredMessage="Born Date is required"> 
+								<f:ajax event="blur" render="messages"/>	
+							</p:inputText>
+						</div>
+					</div>
+					<div class="p-field p-grid">
+						<label for="email" class="p-col-fixed" style="width: 100px">Email</label>
+						<div class="p-col">
+							<p:inputText id="price" 
+								value="#{userBean.user.email}"
+								required="true"
+								requiredMessage="Email is required"> 
+									<f:ajax event="blur" render="messages"/>
+							</p:inputText>
+						</div>
+					</div>
+					<div class="p-field p-grid">
+						<label for="password" class="p-col-fixed" style="width: 100px">Password</label>
+						<div class="p-col">
+							<p:password id="password" 
+							value="#{userBean.user.password}" 
+							toggleMask="true" 
+							redisplay="true"
+							required="true"
+							requiredMessage="Password is required"> 
+								<f:ajax event="blur" render="messages"/>
+							</p:password>
+						</div>
+					</div>
+					<f:facet name="footer">
+				        <p:commandButton icon="pi pi-save" value="Save" action='#{userBean.save}'/>
+				        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+				    </f:facet>
+				</p:card>
+			</h:form>
+			
+			<div class="card"> 
+				<h:form id="form"> 
+					<p:dataTable id="users" var="user" 
+						value="#{userBean.users}" 
+						rowKey="#{user.id}"
+						selectionMode="single"> 
+							<p:column headerText="Name"> <h:outputText value="#{user.nome}" /> </p:column> 
+							<p:column headerText="Data Nasc."> <h:outputText value="#{user.dateNasc}" /> </p:column>					
+							<p:column headerText="E-mail"> <h:outputText value="#{user.email}" /> </p:column> 
+							<p:column headerText="Password"> <h:outputText value="#{user.password}" /> </p:column>					
+					</p:dataTable>
+				</h:form>
+			</div>
+			
+		</ui:define>
+	</ui:composition>
+</html>
